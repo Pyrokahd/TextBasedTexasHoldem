@@ -55,5 +55,22 @@ class Gamestate():
         for player in self.playerList:
             player.cards = {"1": self.deckmanager.drawCard(), "2": self.deckmanager.drawCard()}
 
+    def getActivePlayerBasedOnPhase(self):
+        if self.roundPhase == 0:
+            # Get active player (the player after bigBlind in the first round)
+            for player in self.playerList:
+                if player.bigBlind:
+                    # wenn der Index über die liste geht bei 0 anfangen
+                    if self.playerList.index(player) + 1 > len(self.playerList)-1:
+                        self.activePlayerIndex = 0
+                    else:
+                        self.activePlayerIndex = self.playerList.index(player) + 1
+        elif self.roundPhase == 1:
+            # TODO continue here
+            return
+
+
+
+
 
 

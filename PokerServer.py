@@ -98,6 +98,8 @@ for i in range(3):
 gamestate = Gamestate(playerList)
 gamestate.roundInitialization()
 
+
+
 #printmoney(gamestate.playerList)
 
 # !! LISTEN WERDEN ALS REFERENZEN BEHANDELT LISTE = LISTE1, dadurch verändert LISTE auch LISTE1

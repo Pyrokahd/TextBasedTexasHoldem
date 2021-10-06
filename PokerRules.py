@@ -10,7 +10,12 @@ class PokerRules():
         self.smallBlind = 1  # in € also int
 
 
-    def getPossibleMoves(self, gamestate, activePlayerIndex):
+    def getPossibleMovesForNextPlayer(self, gamestate):
+        activeplayer = gamestate.playerList[gamestate.activePlayerIndex]
+        # Der aktive spieler macht im Server einen Zug. Der Index wird im Gamestate aktualisiert
+        # Gamestate kommrt
+        # Der player vom aktiven Index+1 erhält geupdatete Regeln
+
         # in state and 1 player out rules for that player
         return None
         # self.gamestate.playerList[0].playMoves["Fold"] = False
