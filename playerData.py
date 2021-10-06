@@ -7,7 +7,7 @@ class PlayMoves(Enum):
     """
     An Enum with all possible moves a Player can do
     """
-    Fold = True  # Passen
+    Fold = True  # Passen/Aussteigen
     Check = True  # Schieben
     Bet = True  # Setzen
     Call = True  # Mitgehen
@@ -32,5 +32,8 @@ class Player():
         self.bigBlind = bigBlind
         self.dealer = False  # no need i think
         # self.possibleMoves = [playMoves.Fold, playMoves.Check, playMoves.Bet, playMoves.Call, playMoves.Raise]
-        self.playMoves = {"Fold": True, "Check": True, "Bet": True, "Call": True, "Raise": True}
+        self.playMoves = {"Fold": True, "Check": False, "Bet": False, "Call": True, "Raise": True}
+
+        self.lastMove = None  # last made move by this player (None if no move has been made) else String with "Fold"...
+        self.isready = False
 

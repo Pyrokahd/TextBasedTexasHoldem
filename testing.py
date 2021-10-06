@@ -35,7 +35,7 @@ for i in range(iterations):
 print("chance is:")
 print(chance)
 print("\n")
-## TODO die rechnung oben als ALgorithmus/Function
+## TO DO- die rechnung oben als ALgorithmus/Function
 
 
 
@@ -55,5 +55,5 @@ print(150/1296)
 print(20/1296)
 print(1/1296)
 
-# Test Lösung = 171/1296 TODO JUnit Test machen nachm Programm https://www.quora.com/What-is-the-probability-of-getting-6-at-least-two-times-in-throwing-a-fair-die-4-times
+# Test Lösung = 171/1296 TO DO JUnit Test machen nachm Programm https://www.quora.com/What-is-the-probability-of-getting-6-at-least-two-times-in-throwing-a-fair-die-4-times
 #  binomial probability problem where  n=4, k=2, 3, 4,   p=16  and  q=56.

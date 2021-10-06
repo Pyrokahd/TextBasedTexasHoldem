@@ -1,3 +1,5 @@
+# git remote add origin https://github.com/yourusername/your-repo-name.git
+
 import random
 import threading
 import socket
@@ -12,17 +14,28 @@ server.bind((host, port))  # Server an das socket mit host und port binden
 server.listen()  # start listening
 
 clients = []
+playerList = []
 nicknames = []
 
 
 def broadcast(message):
-    """ text message for all clients """
+    """
+    text message for all clients
+    :param message: String, the message
+    :return:
+    """
     for client in clients:
-        client.send(message)
+        client.send(message.encode("ascii"))
 
 
-def sendMessageToPlayer(Player):
-    # Todo send to right client/socket based on player from gamestateplayerList
+def sendMessageToPlayer(player, message):
+    """
+    message to specific player
+    :param player: socket from player
+    :param message: String, the message
+    :return:
+    """
+    player.send(message.encode("ascii"))
     return
 
 
@@ -30,8 +43,10 @@ def handleC(client):
     #print("handle client")
     while True:
         try:
+            sendMessageToPlayer(client, "type !start to start the game")
             message = client.recv(1024)  # kein Decode => damit vorm senden nicht erneut encoded  #.decode("ascii")
-            broadcast(message)
+            if message.decode("ascii") == "!start":
+                playerList[clients.index(client)].isready = True  # player is ready (client and player array index correspond)
         except:
             print("Fehler bei Client")
             # disconnect client and remove from list
@@ -44,6 +59,11 @@ def handleC(client):
 
 
 def recieveC():
+    """
+    If a client connects it is saved in a list and handled via a handleC method in a new Thread
+    :return:
+    """
+    # TODO nur so lange bis das spiel los geht
     while True:
         # accept connections
         client, adress = server.accept()
@@ -71,18 +91,19 @@ def printmoney(list):
 
 # Testing Blinds
 # Create Testplayer
-playList = []
+
 for i in range(3):
-    playList.append(Player())
+    playerList.append(Player())
 # Create new Gamestate
-gamestate = Gamestate(playList)
+gamestate = Gamestate(playerList)
 gamestate.roundInitialization()
 
 #printmoney(gamestate.playerList)
 
 # !! LISTEN WERDEN ALS REFERENZEN BEHANDELT LISTE = LISTE1, dadurch verändert LISTE auch LISTE1
+# Chanes in der Playerlist in GameState effects the Playerlist in PokerServer
 print("")
 print("deck test")
 card = gamestate.deckmanager.drawCard()
-gamestate.deck[1].printCardStats()
+gamestate.deckmanager.deck[1].printCardStats()
 

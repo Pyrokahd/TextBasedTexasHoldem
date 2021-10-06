@@ -16,20 +16,26 @@ class Gamestate():
         """
         self.playerList = player
         self.playerCount = len(self.playerList)
+        self.activePlayerIndex = 0
 
         self.deckmanager = Cards.DeckManager()
-        self.deck = self.deckmanager.deck
+        # self.deck = self.deckmanager.deck  # todo delete ?
+
+        self.roundPhase = 0  # 0 = vor dem flop, 1 = flop (3cards), 2 = turn(4cards), 3 = river(5cards), 4 = showdown(show cards)
         self.tableCards = {"1": None, "2": None, "3": None, "4": None, "5": None}
 
         self.pot = 0
+
 
 
     def roundInitialization(self):
         # Blinds setzen
         randomPlayer = random.choice(self.playerList)
         randomPlayer.smallBlind = True
+        #self.activePlayerIndex = self.playerList.index(randomPlayer)
 
         bigBlindIndex = self.playerList.index(randomPlayer)+1  # im Uhrzeigersinn addieren = die playerList
+        # wenn es der letze spieler ist, wieder bei 0 anfangen
         if bigBlindIndex > (len(self.playerList)-1):
             bigBlindIndex = 0
         self.playerList[bigBlindIndex].bigBlind = True
@@ -45,7 +51,9 @@ class Gamestate():
                 self.pot += 2
 
         print("Give Cards")
+        # draw cards for player
+        for player in self.playerList:
+            player.cards = {"1": self.deckmanager.drawCard(), "2": self.deckmanager.drawCard()}
 
-        # Give Cards
 
 
