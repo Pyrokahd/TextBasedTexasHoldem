@@ -10,8 +10,21 @@ class PokerRules():
         self.smallBlind = 1  # in € also int
 
 
-    def getPossibleMoves(self):
+    def getPossibleMoves(self, gamestate, activePlayerIndex):
         # in state and 1 player out rules for that player
         return None
         # self.gamestate.playerList[0].playMoves["Fold"] = False
         # Change possible Moves on all Player
+
+
+
+## Flop
+# erste runde links vom big blind fängt an
+# plays Fold-aussteigen Call-mit Raise-erhöhen  (not check-schieben, set)  ...   # Bet = setzen am Anfang der Runde
+
+# andern runden  der small blind fängt an
+# Alle moves möglich
+# wenn alle checken weiter.
+
+# spieler mit letzter erhöhung oder setzung zeigt zuerst (sonst der small blind)
+# alle blinds eins weiter rotieren dann neue runde

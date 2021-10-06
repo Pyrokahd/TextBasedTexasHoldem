@@ -5,10 +5,11 @@ class CardType(Enum):
     """
     Enum to display the types of cards possible
     """
-    Kreuz = 1  # drei kugeln dinger
+    # TODO herausfinden wie das genau funktioniert wozu die zuweisung eines Wertes
+    Kreuz = 0  # drei kugeln dinger
     Pik = 1  # schwarzes Herz
-    Karo = 1  # Raute
-    Herz = 1  # Herz
+    Karo = 2  # Raute
+    Herz = 3  # Herz
 
 
 class BaseCard():
@@ -32,7 +33,7 @@ class BaseCard():
         prints the Type and Value of the Card
         :return:
         """
-        value = self.number
+        number = self.number
         type = ""
         # Get Value
         if self.number == 1:
@@ -53,29 +54,43 @@ class BaseCard():
         elif self.type == CardType.Herz:
             type = "Herz"
 
-        return f"[{type}|{value}]"
+        return f"[{type}|{number}]"
 
 
 class DeckManager():
     def __init__(self):
-        self.deck = self.createDeck()
+        self.deck = self.__createDeck()
         #cardTypesArray = [CardType.Kreuz, CardType.Pik, CardType.Karo, CardType.Herz]
         #for type in cardTypesArray:
         #    for number in range(13):
         #        self.deck.append(BaseCard(type, number))
 
     def drawCard(self):
+        """
+        Draws a random card from the deck, removes it, and returns it
+        :return:
+        """
         card = random.choice(self.deck)
         self.deck.remove(card)
         print(f"new Decksize {len(self.deck)}")
+        return card
 
-    def createDeck(self):
+    def __createDeck(self):
         deck = []
         cardTypesArray = [CardType.Kreuz, CardType.Pik, CardType.Karo, CardType.Herz]
         for type in cardTypesArray:
             for number in range(13):
                 deck.append(BaseCard(type, number))
         return deck
+
+    def printDeckSize(self):
+        return str(len(self.deck))
+
+    def printDeck(self):
+        returnString = f""
+        for card in self.deck:
+            returnString += card.printCardStats() + "\n"
+        return returnString
 
 
 
